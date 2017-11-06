@@ -1,17 +1,15 @@
 <div class="bg-dark mb-4">
-  <div class="container">
-    <nav class="navbar navbar-dark justify-content-between">
-      <a class="navbar-brand" href="#">
+  <nav class="navbar navbar-dark justify-content-between">
+    <a class="navbar-brand" href="#">
         <span class="logo">
           The Weather Finder
         </span>
-      </a>
+    </a>
 
-      <app-search-location
-        (onCoordinates)="onCoordinates.emit($event)"
-        (onZipCode)="onZipCode.emit($event)"
-        (onCity)="onCity.emit($event)">
-      </app-search-location>
-    </nav>
-  </div>
+    <app-search-location
+      (onCoordinates)="onCoordinates.emit($event)"
+      (onZipCode)="onZipCode.emit($event)"
+      (onCity)="onCity.emit($event)">
+    </app-search-location>
+  </nav>
 </div>
