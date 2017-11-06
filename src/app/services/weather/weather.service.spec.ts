@@ -101,14 +101,14 @@ describe('WeatherService', () => {
       [WeatherService, HttpTestingController],
       (service: WeatherService, backend: HttpTestingController) => {
         service.getDailyForecastByZip('80203')
-          .then(res => {
+          .catch(res => {
             expect(res).toBeTruthy();
           });
 
         const req = backend.expectOne({method: 'get'}, 'Get forecast by zip');
         expect(req.request.url).toContain('forecast');
 
-        req.flush({});
+        req.flush({}, {status: 401, statusText: 'Not found'});
         backend.verify();
       })
     );
@@ -145,14 +145,68 @@ describe('WeatherService', () => {
       [WeatherService, HttpTestingController],
       (service: WeatherService, backend: HttpTestingController) => {
         service.getDailyForecastByCity('Denver')
-          .then(res => {
+          .catch(res => {
             expect(res).toBeTruthy();
           });
 
         const req = backend.expectOne({method: 'get'}, 'Get forecast by city');
         expect(req.request.url).toContain('forecast');
 
+        req.flush({}, {status: 401, statusText: 'Not found'});
+        backend.verify();
+      })
+    );
+  });
+
+  describe('get weather by longitude and latitude', () => {
+    it('gives a result with valid coordinates', inject(
+      [WeatherService, HttpTestingController],
+      (service: WeatherService, backend: HttpTestingController) => {
+        service.getDailyForecastByCoordinates(111, 111)
+          .then(res => {
+            expect(res).toBeTruthy();
+          });
+
+        const req = backend.expectOne({method: 'get'}, 'Get forecast by coodinates');
+        expect(req.request.url).toContain('forecast');
+
         req.flush({});
+        backend.verify();
+      })
+    );
+
+    it('errors on missing longitude', inject(
+      [WeatherService, HttpTestingController],
+      (service: WeatherService, backend: HttpTestingController) => {
+        service.getDailyForecastByCoordinates(111, null)
+          .catch(res => {
+            expect(res).toBeTruthy();
+          });
+      })
+    );
+
+    it('errors on missing latitude', inject(
+      [WeatherService, HttpTestingController],
+      (service: WeatherService, backend: HttpTestingController) => {
+        service.getDailyForecastByCoordinates(null, 111)
+          .catch(res => {
+            expect(res).toBeTruthy();
+          });
+      })
+    );
+
+    it('errors on HTTP failure', inject(
+      [WeatherService, HttpTestingController],
+      (service: WeatherService, backend: HttpTestingController) => {
+        service.getDailyForecastByCoordinates(111, 111)
+          .then(res => {
+            expect(res).toBeTruthy();
+          });
+
+        const req = backend.expectOne({method: 'get'}, 'Get forecast by zip');
+        expect(req.request.url).toContain('forecast');
+
+        req.flush({}, {status: 401, statusText: 'Not found'});
         backend.verify();
       })
     );
