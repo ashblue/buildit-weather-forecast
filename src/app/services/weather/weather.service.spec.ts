@@ -1,4 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed, inject, async } from '@angular/core/testing';
 
 import { WeatherService } from './weather.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -71,7 +71,7 @@ describe('WeatherService', () => {
   });
 
   describe('get weather by zip code', () => {
-    it('gives a result with a valid zip code', inject(
+    it('gives a result with a valid zip code', async(inject(
       [WeatherService, HttpTestingController],
       (service: WeatherService, backend: HttpTestingController) => {
         service.getDailyForecastByZip('80203')
@@ -84,7 +84,7 @@ describe('WeatherService', () => {
 
         req.flush({});
         backend.verify();
-      })
+      }))
     );
 
     it('errors on an invalid zip code', inject(
@@ -97,7 +97,7 @@ describe('WeatherService', () => {
       })
     );
 
-    it('errors on HTTP failure', inject(
+    it('errors on HTTP failure', async(inject(
       [WeatherService, HttpTestingController],
       (service: WeatherService, backend: HttpTestingController) => {
         service.getDailyForecastByZip('80203')
@@ -110,12 +110,12 @@ describe('WeatherService', () => {
 
         req.flush({}, {status: 401, statusText: 'Not found'});
         backend.verify();
-      })
+      }))
     );
   });
 
   describe('get weather by city', () => {
-    it('gives a result with a valid city', inject(
+    it('gives a result with a valid city', async(inject(
       [WeatherService, HttpTestingController],
       (service: WeatherService, backend: HttpTestingController) => {
         service.getDailyForecastByCity('Denver')
@@ -128,7 +128,7 @@ describe('WeatherService', () => {
 
         req.flush({});
         backend.verify();
-      })
+      }))
     );
 
     it('errors with on an invalid city', inject(
@@ -141,7 +141,7 @@ describe('WeatherService', () => {
       })
     );
 
-    it('errors on HTTP failure', inject(
+    it('errors on HTTP failure', async(inject(
       [WeatherService, HttpTestingController],
       (service: WeatherService, backend: HttpTestingController) => {
         service.getDailyForecastByCity('Denver')
@@ -154,12 +154,12 @@ describe('WeatherService', () => {
 
         req.flush({}, {status: 401, statusText: 'Not found'});
         backend.verify();
-      })
+      }))
     );
   });
 
   describe('get weather by longitude and latitude', () => {
-    it('gives a result with valid coordinates', inject(
+    it('gives a result with valid coordinates', async(inject(
       [WeatherService, HttpTestingController],
       (service: WeatherService, backend: HttpTestingController) => {
         service.getDailyForecastByCoordinates(111, 111)
@@ -172,7 +172,7 @@ describe('WeatherService', () => {
 
         req.flush({});
         backend.verify();
-      })
+      }))
     );
 
     it('errors on missing longitude', inject(
@@ -195,11 +195,11 @@ describe('WeatherService', () => {
       })
     );
 
-    it('errors on HTTP failure', inject(
+    it('errors on HTTP failure', async(inject(
       [WeatherService, HttpTestingController],
       (service: WeatherService, backend: HttpTestingController) => {
         service.getDailyForecastByCoordinates(111, 111)
-          .then(res => {
+          .catch(res => {
             expect(res).toBeTruthy();
           });
 
@@ -208,7 +208,7 @@ describe('WeatherService', () => {
 
         req.flush({}, {status: 401, statusText: 'Not found'});
         backend.verify();
-      })
+      }))
     );
   });
 });

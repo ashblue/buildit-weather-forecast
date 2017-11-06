@@ -1,4 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed, inject, async } from '@angular/core/testing';
 
 import { GeolocationService } from './geolocation.service';
 
@@ -14,20 +14,20 @@ describe('GeolocationService', () => {
   }));
 
   // @NOTE Would make for a good end-2-end test
-  it('returns the current user location in a promise', inject([GeolocationService], (service: GeolocationService) => {
-      spyOn(window.navigator.geolocation, 'getCurrentPosition').and.callFake( (success) => {
-        success({});
-      });
+  it('returns the current user location in a promise', async(inject([GeolocationService], (service: GeolocationService) => {
+    spyOn(window.navigator.geolocation, 'getCurrentPosition').and.callFake((success) => {
+      success({});
+    });
 
-      service.findCurrentLocation()
-        .then((result) => {
-          expect(result).toBeTruthy();
-        });
-  }));
+    service.findCurrentLocation()
+      .then((result) => {
+        expect(result).toBeTruthy();
+      });
+  })));
 
   // @NOTE Would make for a good end-2-end test
-  it('returns a rejected promise if the user denies the location API', inject([GeolocationService], (service: GeolocationService) => {
-    spyOn(window.navigator.geolocation, 'getCurrentPosition').and.callFake( (success, error) => {
+  it('returns a rejected promise if the user denies the location API', async(inject([GeolocationService], (service: GeolocationService) => {
+    spyOn(window.navigator.geolocation, 'getCurrentPosition').and.callFake((success, error) => {
       error({});
     });
 
@@ -35,5 +35,5 @@ describe('GeolocationService', () => {
       .catch((result) => {
         expect(result).toBeTruthy();
       });
-  }));
+  })));
 });
