@@ -22,7 +22,7 @@ export class WeatherService {
   }
 
   static stringIsZipCode(query: string): boolean {
-    return !(!query || query.match(/[a-z]/i));
+    return !(!query || query.length < 5 || query.match(/[a-z]/i));
   }
 
   getDailyForecastByCity(city: string): Promise<ModelForecast> {
