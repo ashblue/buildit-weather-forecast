@@ -7,11 +7,15 @@ import { HomeComponent } from './pages/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { WeatherService } from './services/weather/weather.service';
 import { GeolocationService } from './services/geolocation/geolocation.service';
+import { HeaderComponent } from './components/header/header.component';
+import { SearchLocationComponent } from './components/search-location/search-location.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent,
+    SearchLocationComponent
   ],
   imports: [
     BrowserModule,
