@@ -47,9 +47,17 @@ export class WeatherService {
       .then(res => res, this.handleError);
   }
 
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred with the weather API', error);
+  getDailyForecastByCoordinates(latitude: number, longitude: number): Promise<ModelForecast> {
+    if (!latitude || !longitude) {
+      return Promise.reject('Coordinates are invalid');
+    }
 
+    return this.http.get(`${BASE_URL}?appid=${API_KEY}&lat=${latitude}&lon=${longitude}`)
+      .toPromise()
+      .then(res => res, this.handleError);
+  }
+
+  private handleError(error: any): Promise<any> {
     return Promise.reject(error);
   }
 }

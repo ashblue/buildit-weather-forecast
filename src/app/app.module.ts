@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { WeatherService } from './services/weather/weather.service';
+import { GeolocationService } from './services/geolocation/geolocation.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { WeatherService } from './services/weather/weather.service';
     AppRoutingModule
   ],
   providers: [
-    WeatherService
+    WeatherService,
+    GeolocationService
   ],
   bootstrap: [AppComponent]
 })
