@@ -9,6 +9,7 @@ import { WeatherService } from './services/weather/weather.service';
 import { GeolocationService } from './services/geolocation/geolocation.service';
 import { HeaderComponent } from './components/header/header.component';
 import { SearchLocationComponent } from './components/search-location/search-location.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { SearchLocationComponent } from './components/search-location/search-loc
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [

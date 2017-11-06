@@ -1,19 +1,32 @@
-<form class="form-inline">
-  <small *ngIf="errMessage" class="text-danger mr-2">
-    {{errMessage}}
-  </small>
+<form class="form-inline"
+      (ngSubmit)="submitSearch()">
 
-  <input class="form-control mr-sm-2"
-         autofocus
-         type="search"
-         placeholder="Weather by zip / city">
+  <fieldset [attr.disabled]="loading ? true : null">
+    <small *ngIf="errMessage" class="text-danger mr-2">
+      {{errMessage}}
+    </small>
 
-  <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
-    <span class="fa fa-search"></span>
-    <span class="text-hide position-absolute">Search</span>
-  </button>
 
-  <button class="btn btn-outline-info my-2 my-sm-0 ml-2">
-    <span class="text-uppercase">Find Me</span>
-  </button>
+    <span *ngIf="loading"
+          class="fa fa-circle-o-notch fa-spin fa-fw fa-inverse">
+    </span>
+
+    <input class="form-control mr-sm-2"
+           [(ngModel)]="search"
+           autofocus
+           name="search-weather"
+           type="search"
+           placeholder="Weather by zip / city">
+
+    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
+      <span class="fa fa-search"></span>
+      <span class="text-hide position-absolute">Search</span>
+    </button>
+
+    <button class="btn btn-outline-info my-2 my-sm-0 ml-2"
+            (click)="findMe()"
+            type="button">
+      <span class="text-uppercase">Find Me</span>
+    </button>
+  </fieldset>
 </form>
