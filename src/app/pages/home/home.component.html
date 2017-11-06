@@ -1,12 +1,31 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <p><span class="fa fa-home"></span></p>
-      <p>I'm a home page</p>
-    </div>
+<app-header
+  (onCity)="searchByCity($event)"
+  (onZipCode)="searchByZipCode($event)"
+  (onCoordinates)="searchByCoordinates($event)">
+</app-header>
 
+<div class="container">
+  <div *ngIf="loading" class="row">
     <div class="col">
-      <p>I'm the 2nd column</p>
+      <p class="text-center mb-3">
+        <span class="fa fa-circle-o-notch fa-spin fa-fw fa-3x"></span>
+      </p>
+
+      <p class="text-center">
+        Finding weather results...
+      </p>
     </div>
+  </div>
+
+  <div *ngIf="!loading">
+    <p *ngIf="!forecast">Please use the above search bar to find a weather forecast or click "FIND ME" to auto-determine your location.</p>
+
+    <p *ngIf="forecast">Weather results go here {{forecast}}</p>
+  </div>
+
+  <div *ngIf="errorMessage">
+    <p class="alert alert-danger" role="alert">
+      {{errorMessage}}
+    </p>
   </div>
 </div>
