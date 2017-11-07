@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit {
    * @param err
    */
   private forecastError = (err) => {
-    this.errorMessage = err;
+    this.errorMessage = err.error.message;
     this.loadEnd();
   };
 
