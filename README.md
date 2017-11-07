@@ -49,7 +49,7 @@ Notes that were requested as per original instructions for this project.
 
 When building this project my first step was to create a MindMap with XMind and throw all of my ideas into it and
 potential solutions. This included reviewing existing weather sites, reviewing the API, and identifying any potential
-edge cases. After that I re-organized my ideas and come up with the dependencies / tools required to find
+edge cases. After that I re-organized my ideas and came up with the dependencies / tools required to find
 the shortest path to properly completing this project. 
 
 I then hosted my code on GitHub and wrote the solution with Angular CLI to speedily produce a front-end app with
