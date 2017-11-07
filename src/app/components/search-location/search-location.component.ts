@@ -55,8 +55,7 @@ export class SearchLocationComponent implements OnInit {
         this.loading = false;
       })
       .catch((err) => {
-        this.errMessage = err;
-        console.error(err);
+        this.errMessage = err.message;
         this.loading = false;
       });
   }
