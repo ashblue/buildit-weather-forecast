@@ -1,0 +1,21 @@
+<div class="card text-white bg-secondary mb-3">
+  <div class="card-header">{{date}}</div>
+  <div class="card-body">
+    <ul class="list-unstyled">
+      <li>Forecast: {{weatherDescription}}</li>
+      <li>Temp Average: {{tmpAverage}}&deg;</li>
+    </ul>
+
+    <button class="btn btn-light btn-block"
+            type="button"
+            (click)="showHours = !showHours">
+      Show Hours
+    </button>
+
+    <ol *ngIf="showHours" class="hourly-breakdown list-unstyled mt-4">
+      <li *ngFor="let hour of day.entries">
+        <app-weather-hour [hour]="hour"></app-weather-hour>
+      </li>
+    </ol>
+  </div>
+</div>

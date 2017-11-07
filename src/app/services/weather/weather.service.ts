@@ -18,11 +18,11 @@ export class WeatherService {
   ) { }
 
   static stringIsCity(query: string): boolean {
-    return !(!query || !query.match(/^[a-zA-Z]+$/));
+    return !(!query || !query.match(/^[a-zA-Z\s]*$/));
   }
 
   static stringIsZipCode(query: string): boolean {
-    return !(!query || query.match(/[a-z]/i));
+    return !(!query || query.length < 5 || query.match(/[a-z]/i));
   }
 
   getDailyForecastByCity(city: string): Promise<ModelForecast> {
@@ -30,7 +30,7 @@ export class WeatherService {
       return Promise.reject('City is invalid');
     }
 
-    return this.http.get(`${BASE_URL}?appid=${API_KEY}&q=${city},us`)
+    return this.http.get(`${BASE_URL}?appid=${API_KEY}&q=${city},us&units=imperial`)
       .toPromise()
       .then(res => res, this.handleError);
   }
@@ -42,7 +42,7 @@ export class WeatherService {
 
     const zipCodeClean = zipCode.slice(0, 5);
 
-    return this.http.get(`${BASE_URL}?appid=${API_KEY}&zip=${zipCodeClean},us`)
+    return this.http.get(`${BASE_URL}?appid=${API_KEY}&zip=${zipCodeClean},us&units=imperial`)
       .toPromise()
       .then(res => res, this.handleError);
   }
@@ -52,7 +52,7 @@ export class WeatherService {
       return Promise.reject('Coordinates are invalid');
     }
 
-    return this.http.get(`${BASE_URL}?appid=${API_KEY}&lat=${latitude}&lon=${longitude}`)
+    return this.http.get(`${BASE_URL}?appid=${API_KEY}&lat=${latitude}&lon=${longitude}&units=imperial`)
       .toPromise()
       .then(res => res, this.handleError);
   }

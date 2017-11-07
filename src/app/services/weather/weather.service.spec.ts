@@ -32,6 +32,11 @@ describe('WeatherService', () => {
       expect(result).toBeTruthy();
     });
 
+    it('rejects zip codes less than 4 digits', () => {
+      const result = WeatherService.stringIsZipCode('1234');
+      expect(result).toBeFalsy();
+    });
+
     it('does not allow undefined', () => {
       const result = WeatherService.stringIsZipCode(undefined);
       expect(result).toBeFalsy();
