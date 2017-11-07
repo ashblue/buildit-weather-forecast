@@ -10,13 +10,19 @@ import { GeolocationService } from './services/geolocation/geolocation.service';
 import { HeaderComponent } from './components/header/header.component';
 import { SearchLocationComponent } from './components/search-location/search-location.component';
 import { FormsModule } from '@angular/forms';
+import { WeatherGalleryComponent } from './components/weather-gallery/weather-gallery.component';
+import { WeatherDayComponent } from './components/weather-day/weather-day.component';
+import { WeatherHourComponent } from './components/weather-hour/weather-hour.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    SearchLocationComponent
+    SearchLocationComponent,
+    WeatherGalleryComponent,
+    WeatherDayComponent,
+    WeatherHourComponent
   ],
   imports: [
     BrowserModule,

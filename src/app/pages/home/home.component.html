@@ -18,9 +18,15 @@
   </div>
 
   <div *ngIf="!loading">
-    <p *ngIf="!forecast">Please use the above search bar to find a weather forecast or click "FIND ME" to auto-determine your location.</p>
+    <p *ngIf="!forecast">Please use the above search bar to find a weather forecast or click "FIND ME" to auto-determine
+      your location.</p>
 
-    <p *ngIf="forecast">Weather results go here {{forecast}}</p>
+    <div *ngIf="forecast">
+      <app-weather-gallery
+        [forecastDays]="forecastDays"
+        [forecast]="forecast">
+      </app-weather-gallery>
+    </div>
   </div>
 
   <div *ngIf="errorMessage">

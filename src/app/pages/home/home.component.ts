@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { GeolocationService } from '../../services/geolocation/geolocation.service';
 import { ModelForecast } from '../../models/forecast/forecast';
 import { WeatherService } from '../../services/weather/weather.service';
+import * as moment from 'moment';
+import { ModelForecastDay } from '../../models/forecast/day';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +14,7 @@ export class HomeComponent implements OnInit {
   errorMessage: string;
   loading: boolean;
   forecast: ModelForecast;
+  forecastDays: ModelForecastDay[] = [];
 
   constructor(
     private geolocationService: GeolocationService,
@@ -54,8 +57,25 @@ export class HomeComponent implements OnInit {
    * Promise success promise handling
    * @param forecast
    */
-  private forecastSuccess = (forecast) => {
+  private forecastSuccess = (forecast: ModelForecast) => {
     this.forecast = forecast;
+
+    // Break up the forecast into day chunks
+    this.forecastDays.length = 0;
+    for (let i = 0; i < 6; i++) {
+      const day = moment().add(i, 'days').format('l');
+
+      const entries = forecast.list.filter((entry) => {
+        return day === moment(entry.dt_txt).format('l');
+      });
+
+      if (entries.length > 0) {
+        this.forecastDays.push({entries});
+      }
+    }
+
+    console.log(this.forecastDays);
+
     this.loadEnd();
   };
 
