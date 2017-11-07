@@ -1,0 +1,14 @@
+<div *ngIf="hour">
+  <hr/>
+
+  <ul class="list-unstyled mb-2">
+    <li><strong>{{time}}</strong> - {{hour.main.temp}}&deg;</li>
+    <li><small>Min: {{hour.main.temp_min}}&deg;</small></li>
+    <li><small>Max: {{hour.main.temp_max}}&deg;</small></li>
+    <li><small>Pressure: {{hour.main.pressure}}</small></li>
+    <li><small>Humidity: {{hour.main.humidity}}</small></li>
+    <li *ngIf="hour.wind"><small>Wind Speed: {{hour.wind.speed}}</small></li>
+    <li *ngIf="hour.rain && hour.rain['3h']"><small>Rain: {{hour.rain['3h']}}</small></li>
+    <li *ngIf="hour.snow && hour.snow['3h']"><small>Snow: {{hour.snow['3h']}}</small></li>
+  </ul>
+</div>
