@@ -17,7 +17,6 @@ export class WeatherHourComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.hour);
   }
 
 }

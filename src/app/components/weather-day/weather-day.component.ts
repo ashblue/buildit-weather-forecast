@@ -8,6 +8,8 @@ import * as moment from 'moment';
   styleUrls: ['./weather-day.component.scss']
 })
 export class WeatherDayComponent implements OnInit {
+  showHours: boolean;
+
   @Input() day: ModelForecastDay;
 
   get tmpAverage(): number {

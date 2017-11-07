@@ -18,7 +18,7 @@ export class WeatherService {
   ) { }
 
   static stringIsCity(query: string): boolean {
-    return !(!query || !query.match(/^[a-zA-Z]+$/));
+    return !(!query || !query.match(/^[a-zA-Z\s]*$/));
   }
 
   static stringIsZipCode(query: string): boolean {

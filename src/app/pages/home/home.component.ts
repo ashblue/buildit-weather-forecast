@@ -74,8 +74,6 @@ export class HomeComponent implements OnInit {
       }
     }
 
-    console.log(this.forecastDays);
-
     this.loadEnd();
   };
 
@@ -101,7 +99,6 @@ export class HomeComponent implements OnInit {
    * Trigger when an async load has completed
    */
   private loadEnd() {
-    console.log(this.forecast);
     this.loading = false;
   }
 }

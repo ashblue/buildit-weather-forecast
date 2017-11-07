@@ -6,7 +6,13 @@
       <li>Temp Average: {{tmpAverage}}&deg;</li>
     </ul>
 
-    <ol class="list-unstyled">
+    <button class="btn btn-light btn-block"
+            type="button"
+            (click)="showHours = !showHours">
+      Show Hours
+    </button>
+
+    <ol *ngIf="showHours" class="hourly-breakdown list-unstyled mt-4">
       <li *ngFor="let hour of day.entries">
         <app-weather-hour [hour]="hour"></app-weather-hour>
       </li>
