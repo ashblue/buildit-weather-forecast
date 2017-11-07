@@ -7,7 +7,7 @@ import { ModelForecast } from '../../models/index';
 // @TODO This should be hidden behind a back-end to prevent the API key from being abused or stolen
 const API_KEY = '3800b0c2a0b4e4624087b6ee7b2ae0f9';
 
-const BASE_URL = 'http://api.openweathermap.org/data/2.5/forecast';
+const BASE_URL = 'https://api.openweathermap.org/data/2.5/forecast';
 
 @Injectable()
 export class WeatherService {
