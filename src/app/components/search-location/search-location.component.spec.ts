@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchLocationComponent } from './search-location.component';
+import { FormsModule } from '@angular/forms';
+import { GeolocationService } from '../../services/geolocation/geolocation.service';
 
 describe('SearchLocationComponent', () => {
   let component: SearchLocationComponent;
@@ -8,7 +10,15 @@ describe('SearchLocationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchLocationComponent ]
+      imports: [
+        FormsModule
+      ],
+      declarations: [
+        SearchLocationComponent
+      ],
+      providers: [
+        GeolocationService
+      ]
     })
     .compileComponents();
   }));

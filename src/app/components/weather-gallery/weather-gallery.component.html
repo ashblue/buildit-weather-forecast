@@ -1,10 +1,10 @@
-<article>
+<article *ngIf="forecast">
   <header>
     <h1>5 Day Weather Forecast</h1>
     <h2>Location: {{forecast.city.name}}</h2>
   </header>
 
-  <div class="row">
+  <div class="row" *ngIf="forecastDays">
     <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let day of forecastDays">
       <app-weather-day [day]="day"></app-weather-day>
     </div>
